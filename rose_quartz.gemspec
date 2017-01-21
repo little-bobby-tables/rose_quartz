@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'An extremely narrow in scope, convention-over-configuration TOTP integration for Rails'
   spec.homepage      = 'https://github.com/little-bobby-tables/rose_quartz'
-  spec.license       = 'The Unlicense'
+  spec.license       = 'Unlicense'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
@@ -23,4 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'factory_girl_rails'
   spec.add_development_dependency 'minitest-reporters'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'codeclimate-test-reporter'
 end

@@ -1,4 +1,4 @@
-# frozen_string_literal: truez
+# frozen_string_literal: true
 require 'devise'
 
 require 'rose_quartz/version'
