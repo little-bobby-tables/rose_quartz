@@ -24,7 +24,6 @@ Rails.backtrace_cleaner.remove_silencers!
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new
 Minitest::Reporters.use!
 
-
 class ActiveSupport::TestCase
   include ::FactoryGirl::Syntax::Methods
 end
