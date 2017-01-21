@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+require 'attr_encrypted'
+require 'rotp'
+
+module RoseQuartz
+  module ActiveRecord
+    module Models
+      class UserAuthenticator < ::ActiveRecord::Base
+        extend ::AttrEncrypted
+
+        belongs_to :user
+
+        attr_encrypted :secret, key: RoseQuartz.configuration.secret_encryption_key
+        after_initialize :set_secret
+
+        def set_secret
+          self.secret ||= ROTP::Base32.random_base32
+        end
+
+        def authenticator
+          @authenticator ||= ROTP.TOTP.new(secret)
+        end
+
+        def authenticate(token)
+          authenticated_at = authenticator.verify_with_drift_and_prior(
+              token, RoseQuartz.configuration.time_drift, last_authenticated_at)
+          return false unless authenticated_at
+          update_columns last_authenticated_at: authenticated_at
+          true
+        end
+      end
+    end
+  end
+end
