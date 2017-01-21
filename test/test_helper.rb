@@ -5,6 +5,7 @@ ActiveRecord::Migrator.migrations_paths = [File.expand_path('../../test/dummy/db
 
 require 'devise'
 require 'rails/test_help'
+require 'minitest/reporters'
 
 require 'factory_girl'
 require 'factories'
@@ -16,6 +17,7 @@ require 'rose_quartz'
 
 Rails.backtrace_cleaner.remove_silencers!
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
   include ::FactoryGirl::Syntax::Methods
