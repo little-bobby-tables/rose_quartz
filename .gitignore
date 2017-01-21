@@ -1,0 +1,20 @@
+# Tests
+/test/dummy/tmp/
+/test/dummy/log/
+*.sqlite3
+
+# Default Rails .gitignore
+
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# IDEA (RubyMine)
+
+/.idea/

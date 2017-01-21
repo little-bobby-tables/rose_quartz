@@ -6,19 +6,18 @@ module Devise
     class TwoFactorAuthenticatable < ::Devise::Strategies::DatabaseAuthenticatable
       def authenticate!
         resource = password.present? && mapping.to.find_for_database_authentication(authentication_hash)
-        super if otp_valid?(resource)
+
+        super if validate(resource) { otp_matches?(resource) }
       end
 
-      def otp_valid?(resource)
-        validate(resource) do
-          authenticator = UserAuthenticator.find_by(user_id: resource.id)
-          return true if authenticator.nil? # two-factor authentication is disabled
+      def otp_matches?(resource)
+        authenticator = RoseQuartz::UserAuthenticator.find_by(user_id: resource.id)
+        return true if authenticator.nil? # two-factor authentication is disabled
 
-          token = params[scope]['tfa_token']
-          return false if token.nil?
+        token = params['tf_authentication_token']
+        return false if token.nil?
 
-          authenticator.authenticate(token)
-        end
+        authenticator.authenticate(token)
       end
     end
   end

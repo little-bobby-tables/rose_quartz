@@ -19,12 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rails', '~> 5.0'
   spec.add_runtime_dependency 'devise', '~> 4.2'
   spec.add_runtime_dependency 'rotp', '~> 3.3'
-  spec.add_runtime_dependency 'attr_encrypted', '~> 3.0'
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rspec-rails'
-  spec.add_development_dependency 'capybara'
   spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'factory_girl_rails'
 end
