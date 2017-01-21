@@ -1,5 +1,7 @@
 # RoseQuartz
 
+[![Build Status](https://travis-ci.org/little-bobby-tables/rose_quartz.svg?branch=master)](https://travis-ci.org/little-bobby-tables/rose_quartz)
+
 A gem that adds two-factor authentication (time-based one-time passwords) to [Devise](https://github.com/plataformatec/devise) 
 using the [rotp](https://github.com/mdp/rotp) library.
 
