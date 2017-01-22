@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 # Inserted with hooks to avoid uninitialized constant errors.
+require 'i18n'
 require 'rqrcode'
 
 module Devise
@@ -57,8 +58,7 @@ module Devise
       if token_valid
         authenticator.save
       else
-        # TODO: use I18n
-        resource.errors.add(:base, 'Invalid token. Please make sure that your device has the correct time settings.')
+        resource.errors.add(:base, I18n.t('rose_quartz.errors.enable_tfa_invalid_token'))
       end
     end
 

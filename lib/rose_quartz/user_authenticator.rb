@@ -8,8 +8,6 @@ module RoseQuartz
     after_initialize :set_secret, if: :new_record?
 
     def set_secret
-      # TODO: make last_authenticated_at a column default
-      #self.last_authenticated_at ||= Time.now - 1.year
       self.secret ||= ROTP::Base32.random_base32
     end
 

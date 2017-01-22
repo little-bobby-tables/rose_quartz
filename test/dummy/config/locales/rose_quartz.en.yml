@@ -1,0 +1,4 @@
+en:
+  rose_quartz:
+    errors:
+      enable_tfa_invalid_token: "Invalid token. Please make sure that your device has the correct time settings."
