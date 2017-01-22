@@ -7,11 +7,5 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-
-    create_table :user_authenticators do |t|
-      t.integer :user_id
-      t.string  :secret
-      t.integer :last_authenticated_at
-    end
   end
 end
