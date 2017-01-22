@@ -6,7 +6,7 @@ class ControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     edit_user do
-      secret = find('input#tfa_secret', visible: false).value
+      secret = find('input#two_factor_authentication_secret', visible: false).value
       token = token_for @user, with_secret: secret
 
       fill_in 'Token', with: token

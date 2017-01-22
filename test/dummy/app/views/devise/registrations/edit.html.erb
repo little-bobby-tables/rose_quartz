@@ -28,13 +28,13 @@
 
     <h3>Two-Factor Authentication</h3>
     <div class="field">
-      <%= fields_for :tfa do |tfa| %>
-        <% if tfa_enabled? %>
-          <%= tfa.label :disable_tfa, 'Disable two-factor authentication' %>
-          <%= tfa.check_box :disable_tfa %>
+      <%= fields_for :two_factor_authentication do |tfa| %>
+        <% if two_factor_authentication_enabled? %>
+          <%= tfa.label :disable, 'Disable two-factor authentication' %>
+          <%= tfa.check_box :disable %>
         <% else %>
-          <%= tfa.hidden_field :secret, value: tfa_secret %>
-          <%= image_tag tfa_qr_code_data_uri(size: 200) %>
+          <%= tfa.hidden_field :secret, value: two_factor_authentication_secret %>
+          <%= image_tag two_factor_authentication_qr_code_uri(size: 200) %>
           <p>
             Scan this QR code with your device and enter the token below:
           </p>

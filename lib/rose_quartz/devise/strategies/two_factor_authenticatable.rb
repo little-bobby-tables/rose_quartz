@@ -14,7 +14,7 @@ module Devise
         authenticator = RoseQuartz::UserAuthenticator.find_by(user_id: resource.id)
         return true if authenticator.nil? # two-factor authentication is disabled
 
-        token = params['tf_authentication_token']
+        token = params['otp']
         return false if token.nil?
 
         authenticator.authenticate(token)

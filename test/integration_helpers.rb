@@ -22,7 +22,7 @@ class ActionDispatch::IntegrationTest
     visit new_user_session_path
     fill_in 'Email', with: email
     fill_in 'Password', with: password
-    fill_in 'Tf authentication token', with: token if token
+    fill_in 'Two-factor authentication token', with: token if token
     click_button 'Log in'
   end
 

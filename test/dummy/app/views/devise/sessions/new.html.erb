@@ -12,8 +12,8 @@
     </div>
 
     <div class="field">
-      <%= label_tag :tf_authentication_token %><br />
-      <%= text_field_tag :tf_authentication_token, '', autocomplete: "off" %>
+      <%= label_tag :otp, 'Two-factor authentication token' %><br />
+      <%= text_field_tag :otp, '', autocomplete: "off" %>
     </div>
 
     <% if devise_mapping.rememberable? -%>
