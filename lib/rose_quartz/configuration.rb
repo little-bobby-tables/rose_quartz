@@ -8,23 +8,16 @@ module RoseQuartz
 
   def self.initialize!
     yield self.configuration
-    insert_authentication_strategy!
-  end
-
-  def self.insert_authentication_strategy!
-    ::Devise.setup do |c|
-      c.warden do |manager|
-        manager.default_strategies(scope: :user).unshift :two_factor_authenticatable
-      end
-    end
+    Hooks.initialize_hooks!
   end
 
   class Configuration
-    attr_accessor :issuer, :time_drift
+    attr_accessor :issuer, :time_drift, :user_identifier
 
     def initialize
-      @issuer = ''
-      @time_drift = 60.seconds
+      @issuer = 'RoseQuartz'
+      @time_drift = 1.minute
+      @user_identifier = :email
     end
   end
 end

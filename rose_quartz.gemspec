@@ -16,9 +16,10 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'rails', '~> 5.0'
-  spec.add_runtime_dependency 'devise', '~> 4.2'
-  spec.add_runtime_dependency 'rotp', '~> 3.3'
+  spec.add_runtime_dependency 'rails', '>= 5.0'
+  spec.add_runtime_dependency 'devise', '>= 4.2'
+  spec.add_runtime_dependency 'rotp', '>= 3.3'
+  spec.add_runtime_dependency 'rqrcode', '>= 0.10'
 
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'factory_girl_rails'

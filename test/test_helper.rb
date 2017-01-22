@@ -29,6 +29,6 @@ class ActiveSupport::TestCase
 end
 
 def token_for(user, at: Time.now)
-  auth_model = RoseQuartz::UserAuthenticator.find_by(user_id: user.id)
-  auth_model.authenticator.at(at)
+  authenticator = RoseQuartz::UserAuthenticator.find_by(user_id: user.id)
+  authenticator.totp.at(at)
 end
