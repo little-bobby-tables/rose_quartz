@@ -13,12 +13,7 @@
 
     <div class="field">
       <%= label_tag :tf_authentication_token %><br />
-      <%= text_field_tag :tf_authentication_token, autocomplete: "off" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
+      <%= text_field_tag :tf_authentication_token, '', autocomplete: "off" %>
     </div>
 
     <% if devise_mapping.rememberable? -%>

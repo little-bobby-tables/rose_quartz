@@ -4,10 +4,16 @@
     <title>Dummy</title>
     <%= csrf_meta_tags %>
 
+    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
 
   <body>
+    <% if current_user.nil? %>
+      <%= link_to 'Log in', new_user_session_path %>
+    <% else %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

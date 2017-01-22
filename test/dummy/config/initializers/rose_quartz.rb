@@ -1,3 +1,3 @@
 RoseQuartz.initialize! do |c|
-  c.issuer = 'test'
+  #c.issuer = 'test'
 end
