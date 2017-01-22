@@ -1,0 +1,12 @@
+<% if current_user.nil? %>
+  <h1 id="status">You're logged out!</h1>
+  <%= link_to 'Log in', new_user_session_path %>
+<% else %>
+  <h1 id="status">You're logged in!</h1>
+  <p>
+    Your account id: <span id="user_id"><%= current_user.id %></span>
+  </p>
+
+  <%= link_to 'Edit user', edit_user_registration_path(current_user) %>
+  <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+<% end %>

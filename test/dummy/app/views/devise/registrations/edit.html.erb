@@ -26,11 +26,6 @@
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
-    <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "off" %>
-    </div>
-
     <h3>Two-Factor Authentication</h3>
     <div class="field">
       <%= fields_for :tfa do |tfa| %>
@@ -43,6 +38,7 @@
           <p>
             Scan this QR code with your device and enter the token below:
           </p>
+          <%= tfa.label :token, 'Token' %><br />
           <%= tfa.text_field :token, value: '' %>
           <p>
             Tip: to configure authentication on multiple devices, scan the code using each device.

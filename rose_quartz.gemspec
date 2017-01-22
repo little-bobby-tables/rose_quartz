@@ -22,6 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rqrcode', '>= 0.10'
 
   spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'capybara'
+  spec.add_development_dependency 'capybara_minitest_spec'
   spec.add_development_dependency 'factory_girl_rails'
   spec.add_development_dependency 'minitest-reporters'
   spec.add_development_dependency 'simplecov'

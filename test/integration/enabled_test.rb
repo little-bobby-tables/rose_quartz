@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TwoFactorIntegrationTest < ActionDispatch::IntegrationTest
+class EnabledTest < ActionDispatch::IntegrationTest
   test 'allows to sign in with a valid token' do
     @user = create(:user_with_tfa)
     sign_in @user, token: token_for(@user)
@@ -17,7 +17,7 @@ class TwoFactorIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'does not allow to sign in with an invalid token' do
     @user = create(:user_with_tfa)
-    sign_in @user, token: 'wrong'
+    sign_in @user, token: 'nope'
 
     refute_authenticated
   end
