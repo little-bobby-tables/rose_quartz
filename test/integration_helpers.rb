@@ -32,7 +32,7 @@ class ActionDispatch::IntegrationTest
 
   def edit_user
     visit edit_user_registration_path(@user)
-    yield
+    yield if block_given?
     fill_in 'Current password', with: @user.password
     click_button 'Update'
   end

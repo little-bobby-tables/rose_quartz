@@ -15,6 +15,23 @@ class ControllerTest < ActionDispatch::IntegrationTest
     assert authenticator_exists?(@user)
   end
 
+  test 'does not enable two-factor authentication without a valid token provided' do
+    @user = create(:user)
+    sign_in @user
+
+    edit_user
+
+    assert_text 'Invalid token'
+    refute authenticator_exists?(@user)
+
+    edit_user do
+      fill_in 'Token', with: 'nope'
+    end
+
+    assert_text 'Invalid token'
+    refute authenticator_exists?(@user)
+  end
+
   test 'allows two-factor authentication to be disabled' do
     @user = create(:user_with_tfa)
     sign_in @user, token: token_for(@user)
