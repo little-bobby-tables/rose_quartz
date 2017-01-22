@@ -49,7 +49,7 @@ rails db:migrate
 #### Signing in
 
 You need a special field for one-time password on the sign-in page (*app/views/devise/sessions/new.html.erb*).
-Since it is always present, you might want to make it obvious that it is only required to be filled
+Since it is always present, you might want to make it obvious that it is only required to be filled in
 when the user has two-factor authentication enabled.
 
 Here's an example:

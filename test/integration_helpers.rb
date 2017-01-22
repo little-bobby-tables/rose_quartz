@@ -30,10 +30,10 @@ class ActionDispatch::IntegrationTest
     reset_session!
   end
 
-  def edit_user
+  def edit_user(fill_in_password: true)
     visit edit_user_registration_path(@user)
     yield if block_given?
-    fill_in 'Current password', with: @user.password
+    fill_in 'Current password', with: @user.password if fill_in_password
     click_button 'Update'
   end
 

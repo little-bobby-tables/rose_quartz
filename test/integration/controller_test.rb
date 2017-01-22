@@ -15,6 +15,17 @@ class ControllerTest < ActionDispatch::IntegrationTest
     assert authenticator_exists?(@user)
   end
 
+  test 'allows two-factor authentication to be disabled' do
+    @user = create(:user_with_tfa)
+    sign_in @user, token: token_for(@user)
+
+    edit_user do
+      check 'Disable two-factor authentication'
+    end
+
+    refute authenticator_exists?(@user)
+  end
+
   test 'does not enable two-factor authentication without a valid token provided' do
     @user = create(:user)
     sign_in @user
@@ -32,12 +43,15 @@ class ControllerTest < ActionDispatch::IntegrationTest
     refute authenticator_exists?(@user)
   end
 
-  test 'allows two-factor authentication to be disabled' do
-    @user = create(:user_with_tfa)
-    sign_in @user, token: token_for(@user)
+  test 'does not enable two-factor authentication without a password provided' do
+    @user = create(:user)
+    sign_in @user
 
-    edit_user do
-      check 'Disable two-factor authentication'
+    edit_user(fill_in_password: false) do
+      secret = find('input#two_factor_authentication_secret', visible: false).value
+      token = token_for @user, with_secret: secret
+
+      fill_in 'Token', with: token
     end
 
     refute authenticator_exists?(@user)
