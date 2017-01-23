@@ -15,9 +15,13 @@ class ControllerTest < ActionDispatch::IntegrationTest
     assert authenticator_exists?(@user)
   end
 
-  test 'allows two-factor authentication to be disabled' do
+  test 'disables two-factor authentication if requested' do
     @user = create(:user_with_tfa)
     sign_in @user, token: token_for(@user)
+
+    edit_user
+
+    assert authenticator_exists?(@user)
 
     edit_user do
       check 'Disable two-factor authentication'

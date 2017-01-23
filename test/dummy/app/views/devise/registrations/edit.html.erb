@@ -32,6 +32,12 @@
         <% if two_factor_authentication_enabled? %>
           <%= tfa.label :disable, 'Disable two-factor authentication' %>
           <%= tfa.check_box :disable %>
+          <p>
+            Your backup code is <strong><%= two_factor_authentication_backup_code %></strong> -
+            save it to access your account if you ever lose your device or don't have it with you.
+          </p>
+          <%= tfa.label :reset_backup_code %>
+          <%= tfa.check_box :reset_backup_code %>
         <% else %>
           <%= tfa.hidden_field :secret, value: two_factor_authentication_secret %>
           <%= image_tag two_factor_authentication_qr_code_uri(size: 200) %>

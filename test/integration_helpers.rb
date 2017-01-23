@@ -10,6 +10,10 @@ class ActiveSupport::TestCase
     authenticator.totp.at(at)
   end
 
+  def backup_code_for(user)
+    RoseQuartz::UserAuthenticator.find_by(user_id: user.id).backup_code
+  end
+
   def authenticator_exists?(user)
     RoseQuartz::UserAuthenticator.exists? user_id: user.id
   end

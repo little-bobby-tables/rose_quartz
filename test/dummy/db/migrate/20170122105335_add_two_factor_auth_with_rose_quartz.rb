@@ -3,6 +3,7 @@ class AddTwoFactorAuthWithRoseQuartz < ActiveRecord::Migration[5.0]
     create_table :user_authenticators do |t|
       t.integer :user_id
       t.string  :secret
+      t.string  :backup_code
       t.integer :last_authenticated_at
     end
   end

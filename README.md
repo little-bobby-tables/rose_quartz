@@ -9,18 +9,21 @@ using the [rotp](https://github.com/mdp/rotp) library.
 It attempts to stay lightweight by making a lot of assumptions — for example, that 
 you have a single authenticatable resource, `User`, and that you're using `ActiveRecord`.
 
-Highlights of *RoseQuartz* are:
+#### Highlights:
 
 * Zero tampering with the `User` model — no additional fields, no included modules.
 * Separate table that can be updated in future without affecting your codebase and data.
 * Built with Rails 5 and Devise 4 in mind.
 
-What it does not do:
+#### What it does not do:
 
-* Use a multiple-page login system (email and password first, two-factor authentication token next).
-It introduces lots of needless complexity, which goes against the purpose of this gem.
-* Encrypt the secret used to generate OTP. You can find other solutions that do.
-* Provide backup codes. This is something I'm actively working on.
+Use a multiple-page login system (email and password first, two-factor authentication token next).
+This introduces lots of needless complexity, which goes against the purpose of the gem.
+
+#### What it should do, but does not (yet):
+
+* Reset the backup code once it is used.
+* Encrypt the secret used to generate OTP and the backup code.
 
 ## Getting Started
 
@@ -85,6 +88,12 @@ Here's a sample implementation:
     <% if two_factor_authentication_enabled? %>
       <%= tfa.label :disable, 'Disable two-factor authentication' %>
       <%= tfa.check_box :disable %>
+      <p>
+        Your backup code is <strong><%= two_factor_authentication_backup_code %></strong> -
+        save it to access your account if you ever lose your device or don't have it with you.
+      </p>
+      <%= tfa.label :reset_backup_code %>
+      <%= tfa.check_box :reset_backup_code %>
     <% else %>
       <%= tfa.hidden_field :secret, value: two_factor_authentication_secret %>
       <%= image_tag two_factor_authentication_qr_code_uri(size: 200) %>
@@ -102,4 +111,4 @@ Here's a sample implementation:
 ```
 
 The following helper methods are available in the view: `two_factor_authentication_enabled?`, 
-`two_factor_authentication_qr_code_uri`, and `two_factor_authentication_secret`.
+`two_factor_authentication_backup_code`, `two_factor_authentication_qr_code_uri`, `two_factor_authentication_secret`.

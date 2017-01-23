@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170122105335) do
   create_table "user_authenticators", force: :cascade do |t|
     t.integer "user_id"
     t.string  "secret"
+    t.string  "backup_code"
     t.integer "last_authenticated_at"
   end
 
