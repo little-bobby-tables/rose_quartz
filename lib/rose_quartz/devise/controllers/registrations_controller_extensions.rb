@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# Inserted with hooks to avoid uninitialized constant errors.
 require 'i18n'
 require 'rqrcode'
 
@@ -70,7 +69,7 @@ module Devise
       if token_valid
         authenticator.save
       else
-        resource.errors.add(:base, I18n.t('rose_quartz.errors.enable_tfa_invalid_token'))
+        resource.errors.add(:base, I18n.t('rose_quartz.invalid_token_when_enabling_tfa'))
       end
     end
 

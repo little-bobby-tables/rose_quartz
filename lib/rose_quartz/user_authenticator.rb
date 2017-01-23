@@ -23,8 +23,13 @@ module RoseQuartz
       end
     end
 
-    def valid_backup_code?(token)
-      token == backup_code
+    def authenticate_backup_code!(token)
+      if token == backup_code
+        reset_backup_code!
+        true
+      else
+        false
+      end
     end
 
     def reset_backup_code!

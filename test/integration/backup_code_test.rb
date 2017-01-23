@@ -8,6 +8,15 @@ class BackupCodeTest < ActionDispatch::IntegrationTest
     assert_authenticated_as @user
   end
 
+  test 'resets a backup code once it has been used and flashes a corresponding message' do
+    @user = create(:user_with_tfa)
+    @backup_code_was = backup_code_for(@user)
+    sign_in @user, token: backup_code_for(@user)
+
+    refute_equal @backup_code_was, backup_code_for(@user)
+    assert_text 'backup code you have used to sign in has been reset'
+  end
+
   test 'does not allow to sign in with an invalid backup code' do
     @user = create(:user_with_tfa)
     sign_in @user, token: backup_code_for(@user).succ

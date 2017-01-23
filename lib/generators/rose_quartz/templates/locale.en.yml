@@ -1,3 +1,4 @@
 en:
   rose_quartz:
+    backup_code_used: "The backup code you have used to sign in has been reset. Please go to your account settings to copy the new one or temporarily disable two-factor authentication."
     invalid_token_when_enabling_tfa: "Invalid token. Please make sure that your device has the correct time settings."

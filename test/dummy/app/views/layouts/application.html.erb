@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <% [:notice, :alert].each do |level| %>
+      <% if flash[level] %>
+        <div class="flash"><%= flash[level] %></div>
+      <% end %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

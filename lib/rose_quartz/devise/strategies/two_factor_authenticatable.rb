@@ -11,16 +11,26 @@ module Devise
       end
 
       def authenticated?(resource)
-        @authenticator = RoseQuartz::UserAuthenticator.find_by(user_id: resource.id)
+        authenticator = RoseQuartz::UserAuthenticator.find_by(user_id: resource.id)
         token = params['otp']
 
         # Two-factor authentication is disabled
-        return true if @authenticator.nil?
+        return true if authenticator.nil?
 
-        # OTP or backup code is not present
+        # Token is not provided
         return false if token.nil?
 
-        @authenticator.authenticate_otp!(token) || @authenticator.valid_backup_code?(token)
+        # Token is a valid OTP
+        return true if authenticator.authenticate_otp!(token)
+
+        # Token is a valid backup code
+        if authenticator.authenticate_backup_code!(token)
+          env['rose_quartz.backup_code_used'] = true
+          return true
+        end
+
+        # Token is not a valid OTP or backup code
+        false
       end
     end
   end

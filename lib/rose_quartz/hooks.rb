@@ -8,6 +8,7 @@ module RoseQuartz
         end
       end
 
+      ::Devise::SessionsController.prepend Devise::SessionsControllerExtensions
       ::Devise::RegistrationsController.prepend Devise::RegistrationsControllerExtensions
     end
   end

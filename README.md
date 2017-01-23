@@ -11,8 +11,10 @@ you have a single authenticatable resource, `User`, and that you're using `Activ
 
 #### Highlights:
 
-* Zero tampering with the `User` model — no additional fields, no included modules.
-* Separate table that can be updated in future without affecting your codebase and data.
+* Adds optional TOTP (compatible with Google Authenticator) to the sign-in process.
+* Provides a backup code as a fallback option; resets it once it has been used and notifies the user.
+* Does not tamper with the `User` model — no additional fields, no included modules.
+* Employs a separate table that can be updated in future without affecting your codebase and data.
 * Built with Rails 5 and Devise 4 in mind.
 
 #### What it does not do:
@@ -22,8 +24,7 @@ This introduces lots of needless complexity, which goes against the purpose of t
 
 #### What it should do, but does not (yet):
 
-* Reset the backup code once it is used.
-* Encrypt the secret used to generate OTP and the backup code.
+* Encrypt the backup code and the secret used to generate OTP.
 
 ## Getting Started
 
@@ -51,9 +52,7 @@ rails db:migrate
 
 #### Signing in
 
-You need a special field for one-time password on the sign-in page (*app/views/devise/sessions/new.html.erb*).
-Since it is always present, you might want to make it obvious that it is only required to be filled in
-when the user has two-factor authentication enabled.
+You need a special field for one-time password/backup code on the sign-in page (*app/views/devise/sessions/new.html.erb*).
 
 Here's an example:
 
