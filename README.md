@@ -41,7 +41,7 @@ bundle install
 
 Next, you need to copy initializers, locales, and add a migration:
 ```
-rails g rose_quarts:install
+rails g rose_quartz:install
 ```
 
 Finally, run the migration:
