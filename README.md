@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/little-bobby-tables/rose_quartz.svg?branch=master)](https://travis-ci.org/little-bobby-tables/rose_quartz)
 [![Test Coverage](https://codeclimate.com/github/little-bobby-tables/rose_quartz/badges/coverage.svg)](https://codeclimate.com/github/little-bobby-tables/rose_quartz/coverage)
+[![Gem Version](https://badge.fury.io/rb/rose_quartz.svg)](https://badge.fury.io/rb/rose_quartz)
 
 A gem that adds two-factor authentication (time-based one-time passwords) to [Devise](https://github.com/plataformatec/devise) 
 using the [rotp](https://github.com/mdp/rotp) library.
