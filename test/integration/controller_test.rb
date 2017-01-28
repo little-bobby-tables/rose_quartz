@@ -36,14 +36,14 @@ class ControllerTest < ActionDispatch::IntegrationTest
 
     edit_user
 
-    assert_text 'Invalid token'
+    assert_text I18n.t 'rose_quartz.invalid_token_when_enabling_tfa'
     refute authenticator_exists?(@user)
 
     edit_user do
       fill_in 'Token', with: 'nope'
     end
 
-    assert_text 'Invalid token'
+    assert_text I18n.t 'rose_quartz.invalid_token_when_enabling_tfa'
     refute authenticator_exists?(@user)
   end
 

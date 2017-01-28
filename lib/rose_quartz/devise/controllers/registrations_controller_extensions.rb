@@ -68,6 +68,7 @@ module Devise
       token_valid = authenticator.authenticate_otp!(token) rescue false
       if token_valid
         authenticator.save
+        flash[:alert] = I18n.t('rose_quartz.tfa_enabled')
       else
         resource.errors.add(:base, I18n.t('rose_quartz.invalid_token_when_enabling_tfa'))
       end

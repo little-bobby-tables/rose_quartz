@@ -14,7 +14,7 @@ class BackupCodeTest < ActionDispatch::IntegrationTest
     sign_in @user, token: backup_code_for(@user)
 
     refute_equal @backup_code_was, backup_code_for(@user)
-    assert_text 'backup code you have used to sign in has been reset'
+    assert_text I18n.t 'rose_quartz.backup_code_used'
   end
 
   test 'does not allow to sign in with an invalid backup code' do
@@ -24,7 +24,7 @@ class BackupCodeTest < ActionDispatch::IntegrationTest
     refute_authenticated
   end
 
-  test 'allows user to reset backup code' do
+  test 'allows the user to reset backup code' do
     @user = create(:user_with_tfa)
     @backup_code_was = backup_code_for(@user)
     sign_in @user, token: backup_code_for(@user)
@@ -34,5 +34,19 @@ class BackupCodeTest < ActionDispatch::IntegrationTest
     end
 
     refute_equal @backup_code_was, backup_code_for(@user)
+  end
+
+  test 'reminds the user to copy the backup code when they enable two-factor authentication' do
+    @user = create(:user)
+    sign_in @user
+
+    edit_user do
+      secret = find('input#two_factor_authentication_secret', visible: false).value
+      token = token_for @user, with_secret: secret
+
+      fill_in 'Token', with: token
+    end
+
+    assert_text I18n.t 'rose_quartz.tfa_enabled'
   end
 end
